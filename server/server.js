@@ -9,7 +9,7 @@ app.use(cors()); // allows frontend to access backend
 app.use(bodyParser.json());
 
 // Replace with your MongoDB URI (from Step 1)
-const mongoURI = "mongodb://localhost:27017/financeDB";
+const mongoURI = "mongodb://172.16.27.232:27017/financeDB";
 mongoose.connect(mongoURI)
   .then(() => console.log("MongoDB connected successfully"))
   .catch(err => console.log("MongoDB connection error:", err));
