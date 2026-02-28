@@ -1,0 +1,144 @@
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    height: 100vh;
+    background: #f4f7fb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Main Layout */
+.main-container {
+    width: 90%;
+    max-width: 1100px;
+    height: 600px;
+    display: flex;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+    background: white;
+}
+
+/* Left Panel */
+.left-panel {
+    flex: 1;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px;
+}
+
+.left-panel h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.left-panel p {
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+/* Right Panel */
+.right-panel {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff;
+}
+
+/* Form Box */
+.form-box {
+    width: 80%;
+    max-width: 350px;
+}
+
+.form-box h2 {
+    margin-bottom: 25px;
+    color: #2a5298;
+}
+
+/* Inputs */
+input {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 15px;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+input:focus {
+    border-color: #2a5298;
+    outline: none;
+    box-shadow: 0 0 5px rgba(42, 82, 152, 0.3);
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 14px;
+    background: #2a5298;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #1e3c72;
+}
+
+/* Toggle */
+.toggle-text {
+    margin-top: 15px;
+    font-size: 14px;
+    color: grey;
+}
+
+#toggle-btn {
+    color: #28a745;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Messages */
+#message {
+    margin-top: 10px;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* Hidden */
+.hidden {
+    display: none;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .main-container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .left-panel {
+        padding: 40px;
+        text-align: center;
+    }
+
+    .right-panel {
+        padding: 40px 0;
+    }
+}
