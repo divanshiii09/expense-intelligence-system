@@ -1,0 +1,8 @@
+/* Global app styling */
+.app-container {
+  background: #1e3c72; /* blue background */
+  min-height: 100vh;
+  color: #ffffff;
+  font-family: "Arial", sans-serif;
+  padding: 20px 0;
+}

@@ -1,0 +1,55 @@
+.income-container {
+  text-align: center;
+  color: #ffffff;
+  width: 100%;
+  padding: 40px 20px;
+}
+
+.income-title {
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.income-subtitle {
+  margin-top: 8px;
+  opacity: 0.9;
+}
+
+.income-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  max-width: 900px;
+  margin: 50px auto;
+}
+
+.income-card {
+  padding: 30px;
+  border-radius: 18px;
+  background: #ffffff;
+  border: 1px solid #dcdcdc;
+  color: grey;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.income-card:hover {
+  transform: translateY(-8px);
+  background: #f4f7fb;
+}
+
+.income-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.income-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1e3c72;
+}
+
+.income-desc {
+  font-size: 14px;
+  color: grey;
+}

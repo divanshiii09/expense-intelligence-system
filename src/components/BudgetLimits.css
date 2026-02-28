@@ -1,0 +1,10 @@
+.limit-input {
+  margin-top: 12px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #dcdcdc;
+  background: #ffffff;
+  color: #1e3c72;
+  font-size: 15px;
+}
