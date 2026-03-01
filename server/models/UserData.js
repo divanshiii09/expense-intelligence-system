@@ -4,27 +4,23 @@ const UserDataSchema = new mongoose.Schema(
   {
     incomeType: {
       type: String,
-      required: true
+      required: true,
     },
-
     category: {
       type: String,
-      required: true
+      required: true,
     },
-
     questionnaire: {
       type: Object,
-      required: true
+      required: true,
     },
-
     spendingPriority: {
-      type: Object
+      type: Object,
     },
-
     budgetLimits: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   { timestamps: true }
 );

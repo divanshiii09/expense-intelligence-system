@@ -55,8 +55,19 @@ function App() {
             Entertainment: 1,
             Transport: 1,
           },
-      budgetLimits: limits,
+      budgetLimits: Object.keys(limits).length
+        ? limits
+        : {
+            "Food & Groceries": 3000,
+            Shopping: 1500,
+            Bills: 4000,
+            Health: 1000,
+            Entertainment: 1000,
+            Transport: 1500,
+          },
     };
+
+    console.log("Sending to backend:", finalData); // debug check
 
     try {
       const res = await fetch("http://localhost:5000/api/userdata/save", {
