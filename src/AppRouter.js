@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
-import Login from "./Login";
-import BankUpload from "./BankUpload";
-import IncomeCategory from "./components/IncomeCategory";
-import Questionnaire from "./components/Questionnaire";
-import SpendingPriority from "./components/SpendingPriority";
-import BudgetLimits from "./components/BudgetLimits";
+// ✅ Use exact filenames as they exist in components folder
+import Login from './components/login';
+import BankUpload from './components/BankUpload';
+import IncomeCategory from './components/IncomeCategory';
+import Questionnaire from './components/Questionnaire';
+import SpendingPriority from './components/SpendingPriority';
+import BudgetLimits from './components/BudgetLimits';
 
 function AppRouter() {
-  // ✅ Global state to share across pages
   const [user, setUser] = useState(null);
   const [bankData, setBankData] = useState([]);
   const [formData, setFormData] = useState({
@@ -21,7 +21,7 @@ function AppRouter() {
   });
   const [step, setStep] = useState(1);
 
-  // ✅ Handlers for multi-step form
+  // Handlers for multi-step form
   const handleIncomeNext = (incomeType) => {
     setFormData(prev => ({
       ...prev,
@@ -93,72 +93,35 @@ function AppRouter() {
   return (
     <Router>
       <Routes>
-        {/* Login page */}
+        <Route path="/" element={<Navigate to="/login" />} />
+
         <Route path="/login" element={<Login onLogin={setUser} />} />
 
-        {/* Bank Upload page (only if logged in) */}
-        <Route
-          path="/upload"
-          element={
-            user ? (
-              <BankUpload onUpload={setBankData} />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
+        <Route path="/upload" element={
+          user ? <BankUpload onUpload={setBankData} /> : <Navigate to="/login" />
+        } />
 
-        {/* Multi-step flow */}
-        <Route
-          path="/income"
-          element={
-            user ? (
-              <IncomeCategory onNext={handleIncomeNext} />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
+        <Route path="/income" element={
+          user ? <IncomeCategory onNext={handleIncomeNext} /> : <Navigate to="/login" />
+        } />
 
-        <Route
-          path="/questionnaire"
-          element={
-            user ? (
-              <Questionnaire onNext={handleQuestionnaireNext} />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
+        <Route path="/questionnaire" element={
+          user ? <Questionnaire onNext={handleQuestionnaireNext} /> : <Navigate to="/login" />
+        } />
 
-        <Route
-          path="/spending"
-          element={
-            user ? (
-              <SpendingPriority onNext={handleSpendingNext} />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
+        <Route path="/spending" element={
+          user ? <SpendingPriority onNext={handleSpendingNext} /> : <Navigate to="/login" />
+        } />
 
-        <Route
-          path="/budget"
-          element={
-            user ? (
-              <BudgetLimits
-                categories={Object.keys(formData.spendingPriority).filter(
-                  cat => formData.spendingPriority[cat] >= 3
-                )}
-                onSave={handleSave}
-              />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
+        <Route path="/budget" element={
+          user ? <BudgetLimits
+            categories={Object.keys(formData.spendingPriority).filter(
+              cat => formData.spendingPriority[cat] >= 3
+            )}
+            onSave={handleSave}
+          /> : <Navigate to="/login" />
+        } />
 
-        {/* Default redirect */}
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </Router>
