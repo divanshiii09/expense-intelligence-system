@@ -16,13 +16,13 @@ function App() {
   });
 
   const handleIncomeNext = (incomeType) => {
-    setFormData(prev => ({
-      ...prev,
-      incomeType,
-      category: incomeType,
-    }));
-    setStep(2);
-  };
+  setFormData(prev => ({
+    ...prev,
+    incomeType: incomeType,
+    category: incomeType
+  }));
+  setStep(2);
+};
 
   const handleQuestionnaireNext = (data) => {
     setFormData(prev => ({ ...prev, questionnaire: data }));

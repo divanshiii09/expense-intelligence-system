@@ -2,37 +2,31 @@ const mongoose = require("mongoose");
 
 const UserDataSchema = new mongoose.Schema(
   {
-    // ✅ Income selection page
     incomeType: {
       type: String,
-      required: false,
+      required: true
     },
 
     category: {
       type: String,
-      required: false,
+      required: true
     },
 
-    // ✅ Questionnaire page
     questionnaire: {
-      monthlyIncome: String,
-      monthlySpending: String,
-      riskLevel: String,
-    },
-
-    // ✅ Spending priority page
-    spendingPriority: {
       type: Object,
+      required: true
     },
 
-    // ✅ Budget limits page
+    spendingPriority: {
+      type: Object
+    },
+
     budgetLimits: {
       type: Object,
-    },
+      required: true
+    }
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
 module.exports = mongoose.model("UserData", UserDataSchema);
