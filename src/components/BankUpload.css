@@ -1,0 +1,60 @@
+/* BankUpload.css - styling consistent with other pages */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body, html {
+    height: 100%;
+}
+
+.bank-upload-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #f4f7fb;
+}
+
+.upload-box {
+    width: 90%;
+    max-width: 400px;
+    padding: 40px;
+    border-radius: 16px;
+    background: white;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.upload-box h2 {
+    margin-bottom: 25px;
+    color: #2a5298;
+}
+
+input[type="file"] {
+    margin-top: 15px;
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    border: 1px solid #dcdcdc;
+}
+
+button {
+    margin-top: 20px;
+    padding: 14px 20px;
+    width: 100%;
+    background: #2a5298;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #1e3c72;
+}
