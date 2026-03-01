@@ -16,13 +16,13 @@ function App() {
   });
 
   const handleIncomeNext = (incomeType) => {
-  setFormData(prev => ({
-    ...prev,
-    incomeType: incomeType,
-    category: incomeType
-  }));
-  setStep(2);
-};
+    setFormData(prev => ({
+      ...prev,
+      incomeType: incomeType,
+      category: incomeType
+    }));
+    setStep(2);
+  };
 
   const handleQuestionnaireNext = (data) => {
     setFormData(prev => ({ ...prev, questionnaire: data }));
@@ -35,7 +35,28 @@ function App() {
   };
 
   const handleSave = async (limits) => {
-    const finalData = { ...formData, budgetLimits: limits };
+    const finalData = {
+      incomeType: formData.incomeType || "No Income",
+      category: formData.category || "No Income",
+      questionnaire: {
+        incomeStability: formData.questionnaire.incomeStability || "Somewhat Stable",
+        savingHabit: formData.questionnaire.savingHabit || "Sometimes",
+        majorExpense: formData.questionnaire.majorExpense || "Food & Groceries",
+        riskLevel: formData.questionnaire.riskLevel || "Low",
+        expenseControl: formData.questionnaire.expenseControl || "Average",
+      },
+      spendingPriority: Object.keys(formData.spendingPriority).length
+        ? formData.spendingPriority
+        : {
+            "Food & Groceries": 3,
+            Shopping: 3,
+            Bills: 4,
+            Health: 1,
+            Entertainment: 1,
+            Transport: 1,
+          },
+      budgetLimits: limits,
+    };
 
     try {
       const res = await fetch("http://localhost:5000/api/userdata/save", {
@@ -47,7 +68,8 @@ function App() {
       const data = await res.json();
       if (data.success) alert("Limits saved successfully!");
       else alert("Error saving data");
-    } catch {
+    } catch (err) {
+      console.error(err);
       alert("Server connection failed");
     }
   };
