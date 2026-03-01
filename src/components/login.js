@@ -1,15 +1,16 @@
+// src/components/login.js
 import React, { useState } from "react";
-import './Login.css';
+import { useNavigate } from "react-router-dom";
+import "./Login.css";
 
 function Login({ onLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
     setMessage("");
 
     try {
@@ -22,43 +23,47 @@ function Login({ onLogin }) {
       const data = await res.json();
 
       if (res.ok) {
-        // ✅ Only update user state on successful login
-        onLogin(data.user); 
-        setMessage("Login successful!");
+        onLogin(data.user);
+        navigate("/upload"); // Bank upload page
       } else {
-        setMessage(data.message || "Login failed");
+        setMessage(data.message);
       }
     } catch (err) {
       console.error(err);
-      setMessage("Server error");
-    } finally {
-      setIsLoading(false);
+      setMessage("Server connection failed");
     }
   };
 
   return (
-    <div className="login-container">
-      <form onSubmit={handleSubmit} className="login-form">
-        <h2>Login</h2>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? "Logging in..." : "Login"}
-        </button>
-        {message && <p className="login-message">{message}</p>}
-      </form>
+    <div className="main-container">
+      <div className="left-panel">
+        <h1>Expense Intelligence</h1>
+        <p>Smart Financial Management for Modern Users</p>
+      </div>
+
+      <div className="right-panel">
+        <div className="form-box">
+          <h2>Login</h2>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="email"
+              placeholder="Email Address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <button type="submit">Login</button>
+          </form>
+          {message && <p id="message">{message}</p>}
+        </div>
+      </div>
     </div>
   );
 }
