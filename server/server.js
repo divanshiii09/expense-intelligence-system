@@ -11,12 +11,12 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// ✅ MongoDB Connection (Non-SRV for network compatibility)
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB connected successfully"))
+// ✅ LOCAL MongoDB Compass connection
+mongoose.connect("mongodb://127.0.0.1:27017/financeDB")
+  .then(() => console.log("MongoDB LOCAL connected successfully"))
   .catch(err => console.log("MongoDB connection error:", err));
 
-// ✅ Save user data
+// Save user data
 app.post("/api/userdata/save", async (req, res) => {
   try {
     const newData = new UserData(req.body);
@@ -28,6 +28,5 @@ app.post("/api/userdata/save", async (req, res) => {
   }
 });
 
-// ✅ Start server
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
