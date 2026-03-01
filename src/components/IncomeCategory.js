@@ -27,7 +27,7 @@ function IncomeCategory({ onNext }) {
           <div
             key={item.name}
             className="income-card"
-            onClick={() => handleClick(item)}
+            onClick={() => onNext(item.name)}
           >
             <div className="income-icon">{item.icon}</div>
             <div className="income-name">{item.name}</div>

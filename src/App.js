@@ -7,7 +7,7 @@ import BudgetLimits from "./components/BudgetLimits";
 function App() {
   const [step, setStep] = useState(1);
 
-  // ✅ GLOBAL DATA STORE
+  // 🔹 Global form storage (NO UI impact)
   const [formData, setFormData] = useState({
     incomeType: "",
     category: "",
@@ -16,29 +16,34 @@ function App() {
     budgetLimits: {},
   });
 
-  // STEP 1 → Income
-  const handleIncomeNext = (incomeType, category) => {
-    setFormData(prev => ({ ...prev, incomeType, category }));
+  // STEP 1
+  const handleIncomeNext = (incomeType) => {
+    setFormData(prev => ({
+      ...prev,
+      incomeType,
+      category: incomeType,
+    }));
     setStep(2);
   };
 
-  // STEP 2 → Questionnaire
+  // STEP 2
   const handleQuestionnaireNext = (data) => {
     setFormData(prev => ({ ...prev, questionnaire: data }));
     setStep(3);
   };
 
-  // STEP 3 → Spending Priority
+  // STEP 3
   const handleSpendingNext = (data) => {
     setFormData(prev => ({ ...prev, spendingPriority: data }));
     setStep(4);
   };
 
-  // STEP 4 → Final Save
+  // STEP 4 → SAVE
   const handleSave = async (limits) => {
-    const finalData = { ...formData, budgetLimits: limits };
-
-    console.log("FINAL DATA SENT:", finalData);
+    const finalData = {
+      ...formData,
+      budgetLimits: limits,
+    };
 
     try {
       const res = await fetch("http://localhost:5000/api/userdata/save", {
@@ -50,7 +55,7 @@ function App() {
       const data = await res.json();
 
       if (data.success) {
-        alert("Saved successfully!");
+        alert("Limits saved successfully!");
       } else {
         alert("Error saving data");
       }
@@ -59,17 +64,20 @@ function App() {
     }
   };
 
-  // RENDER FLOW
+  // RENDER FLOW (NO STYLE CHANGES)
   if (step === 1) return <IncomeCategory onNext={handleIncomeNext} />;
   if (step === 2) return <Questionnaire onNext={handleQuestionnaireNext} />;
   if (step === 3) return <SpendingPriority onNext={handleSpendingNext} />;
-  if (step === 4) return (
-    <BudgetLimits
-      categories={Object.keys(formData.spendingPriority)
-        .filter(cat => formData.spendingPriority[cat] >= 3)}
-      onSave={handleSave}
-    />
-  );
+  if (step === 4)
+    return (
+      <BudgetLimits
+        categories={Object.keys(formData.spendingPriority)
+          .filter(cat => formData.spendingPriority[cat] >= 3)}
+        onSave={handleSave}
+      />
+    );
+
+  return null;
 }
 
 export default App;
